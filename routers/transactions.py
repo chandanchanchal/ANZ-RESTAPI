@@ -10,7 +10,8 @@ router = APIRouter(prefix="/transactions", tags=["transactions"])
 
 id_counter = 1
 
-@router.post("/", response_model=Transaction, status_code=201, dependencies=[Depends(verify_token)])
+#@router.post("/", response_model=Transaction, status_code=201, dependencies=[Depends(verify_token)])
+@router.post("/", response_model=Transaction, status_code=201)
 def create_transaction(tx: TransactionCreate):
     global id_counter
     # Validate account exists
@@ -21,7 +22,7 @@ def create_transaction(tx: TransactionCreate):
     fake_transactions_db.append(new_tx)
     return new_tx
 
-@router.get("/", response_model=List[Transaction], dependencies=[Depends(verify_token)])
+#@router.get("/", response_model=List[Transaction], dependencies=[Depends(verify_token))
+@router.get("/", response_model=List[Transaction])
 def get_transactions(skip: int = 0, limit: int = 10):
     return fake_transactions_db[skip:skip + limit]
-
