@@ -21,8 +21,7 @@ def create_transaction(tx: TransactionCreate):
     id_counter += 1
     fake_transactions_db.append(new_tx)
     return new_tx
-
-#@router.get("/", response_model=List[Transaction], dependencies=[Depends(verify_token))
+#@router.get("/", response_model=List[Transaction], dependencies=[Depends(verify_token)])
 @router.get("/", response_model=List[Transaction])
 def get_transactions(skip: int = 0, limit: int = 10):
     return fake_transactions_db[skip:skip + limit]
